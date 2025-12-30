@@ -1,4 +1,4 @@
-import { Cloud, AlertCircle } from 'lucide-react';
+import { Cloud, AlertCircle } from "lucide-react";
 
 interface AQICardProps {
   aqi: {
@@ -16,13 +16,17 @@ export default function AQICard({ aqi, location }: AQICardProps) {
     <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8">
       <div className="flex items-start justify-between mb-6">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">Current Air Quality</h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">
+            Current Air Quality
+          </h2>
           <p className="text-gray-600 flex items-center">
             <Cloud className="w-4 h-4 mr-1.5" />
-            Last updated: 2 minutes ago
+            Last updated: 2 minutes ago • {location}
           </p>
         </div>
-        <div className={`${aqi.color} text-white px-4 py-2 rounded-lg font-semibold`}>
+        <div
+          className={`${aqi.color} text-white px-4 py-2 rounded-lg font-semibold`}
+        >
           {aqi.category}
         </div>
       </div>
@@ -59,8 +63,13 @@ export default function AQICard({ aqi, location }: AQICardProps) {
         <div className="flex items-start">
           <AlertCircle className="w-5 h-5 text-yellow-600 mr-3 mt-0.5 flex-shrink-0" />
           <div>
-            <p className="text-sm font-medium text-yellow-900 mb-1">What this means</p>
-            <p className="text-sm text-yellow-800">{aqi.description}. Sensitive groups should consider reducing prolonged outdoor activities.</p>
+            <p className="text-sm font-medium text-yellow-900 mb-1">
+              What this means
+            </p>
+            <p className="text-sm text-yellow-800">
+              {aqi.description}. Sensitive groups should consider reducing
+              prolonged outdoor activities.
+            </p>
           </div>
         </div>
       </div>

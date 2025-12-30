@@ -36,6 +36,39 @@ export default function HealthRecommendations({ category }: HealthRecommendation
 
   const recommendations = getRecommendations();
 
+  const getActivityGuidance = () => {
+    switch (category) {
+      case 'Good':
+        return [
+          { name: '🚶 Walking', status: '✅ Safe' },
+          { name: '🏃 Running', status: '✅ Safe' },
+          { name: '🚴 Cycling', status: '✅ Safe' },
+          { name: '🏠 Indoor workouts', status: '✅ Safe' }
+        ];
+      case 'Moderate':
+        return [
+          { name: '🚶 Walking', status: '✅ Safe' },
+          { name: '🏃 Running', status: '⚠️ Limit duration' },
+          { name: '🚴 Cycling', status: '⚠️ Limit duration' },
+          { name: '🏠 Indoor workouts', status: '✅ Safe' }
+        ];
+      case 'Unhealthy for Sensitive Groups':
+        return [
+          { name: '🚶 Walking', status: '⚠️ Limit duration' },
+          { name: '🏃 Running', status: '❌ Not recommended' },
+          { name: '🚴 Cycling', status: '❌ Avoid' },
+          { name: '🏠 Indoor workouts', status: '✅ Safe' }
+        ];
+      default:
+        return [
+          { name: '🚶 Walking', status: '❌ Not recommended' },
+          { name: '🏃 Running', status: '❌ Not recommended' },
+          { name: '🚴 Cycling', status: '❌ Avoid' },
+          { name: '🏠 Indoor workouts', status: '✅ Safe' }
+        ];
+    }
+  };
+
   return (
     <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
       <h3 className="text-xl font-bold text-gray-900 mb-6">Health Recommendations</h3>
@@ -64,6 +97,20 @@ export default function HealthRecommendations({ category }: HealthRecommendation
             >
               {group}
             </span>
+          ))}
+        </div>
+      </div>
+
+      <div className="mt-6 pt-6 border-t border-gray-200">
+        <h4 className="font-semibold text-gray-900 mb-3">Activity Guidance:</h4>
+        <div className="space-y-2">
+          {getActivityGuidance().map((activity, index) => (
+            <div key={index} className="flex items-center justify-between">
+              <span className="text-gray-700 text-sm">{activity.name}:</span>
+              <span className={`text-sm font-medium ${activity.status === '✅ Safe' ? 'text-green-600' : activity.status === '⚠️ Limit duration' ? 'text-yellow-600' : 'text-red-600'}`}>
+                {activity.status}
+              </span>
+            </div>
           ))}
         </div>
       </div>

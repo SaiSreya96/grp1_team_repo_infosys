@@ -1,3 +1,273 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Chatbot floating-action-button and expand animation */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.animate-fade-in {
+  animation: fade-in 320ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* AirAware animated logo style */
+.airaware-logo {
+  font-family: "Playfair Display", serif;
+  font-size: 4.2rem;
+  line-height: 1.1;
+  color: #fff;
+  letter-spacing: 2px;
+  opacity: 0;
+  animation: logoFadeInSlide 1.6s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+  text-shadow: 0 4px 24px rgba(47, 103, 209, 0.11);
+}
+
+@keyframes logoFadeInSlide {
+  0% {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.8);
+  }
+  70% {
+    opacity: 0.7;
+    transform: translateY(8px) scale(1.07);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Small utility animation for notifications */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-up {
+  animation: slideUp 220ms ease-out;
+}
+
+/* Quick dark-mode fallbacks for common utility classes so toggle is visible
+   without adding `dark:` to every component class. This is pragmatic and
+   minimal — components can be updated to use `dark:` variants later. */
+html.dark {
+  --aa-bg: #071025;
+  --aa-surface: #0b1220;
+  --aa-muted: #94a3b8;
+  --aa-text: #e6eef8;
+  --aa-border: #21303a;
+}
+
+html.dark body {
+  background-color: var(--aa-bg);
+  color: var(--aa-text);
+}
+
+html.dark .bg-white {
+  background-color: var(--aa-surface) !important;
+}
+html.dark .bg-gray-50 {
+  background-color: #071427 !important;
+}
+html.dark .bg-gray-100 {
+  background-color: #0f1724 !important;
+}
+html.dark .text-gray-900,
+html.dark .text-gray-800 {
+  color: var(--aa-text) !important;
+}
+html.dark .text-gray-600,
+html.dark .text-gray-500,
+html.dark .text-gray-400 {
+  color: var(--aa-muted) !important;
+}
+html.dark .border-gray-200,
+html.dark .border-gray-100 {
+  border-color: var(--aa-border) !important;
+}
+html.dark .from-slate-50 {
+  --tw-gradient-from: #0b1220 !important;
+}
+html.dark .to-blue-50 {
+  --tw-gradient-to: #05243a !important;
+}
+
+/* Buttons and small accents */
+html.dark .bg-blue-600 {
+  background-color: #0b63d6 !important;
+}
+html.dark .text-white {
+  color: var(--aa-text) !important;
+}
+
+/* Global design tokens for light mode */
+:root {
+  --aa-bg: #f8fafc;
+  --aa-surface: #ffffff;
+  --aa-muted: #6b7280;
+  --aa-text: #0f172a;
+  --aa-border: #e6edf6;
+  --aa-accent: #0b63d6;
+}
+
+/* Reusable card and control styles to make UI consistent */
+.aa-card {
+  background-color: var(--aa-surface);
+  border: 1px solid var(--aa-border);
+  border-radius: 0.75rem; /* rounded-xl */
+  padding: 1rem;
+  box-shadow: 0 6px 18px rgba(12, 24, 36, 0.04);
+}
+
+.aa-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  background-color: var(--aa-accent);
+  color: white;
+  font-weight: 600;
+}
+
+.aa-btn-muted {
+  background-color: transparent;
+  color: var(--aa-text);
+  border: 1px solid var(--aa-border);
+}
+
+.aa-badge {
+  display: inline-block;
+  padding: 0.25rem 0.6rem;
+  font-size: 0.7rem;
+  border-radius: 9999px;
+  background: rgba(11, 99, 214, 0.08);
+  color: var(--aa-accent);
+  font-weight: 600;
+}
+
+/* Typography tweaks */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  letter-spacing: -0.01em;
+}
+
+p,
+li {
+  line-height: 1.6;
+}
+
+/* Dark mode variants using variables for consistency */
+html.dark {
+  --aa-bg: #071025;
+  --aa-surface: #0b1220;
+  --aa-muted: #94a3b8;
+  --aa-text: #e6eef8;
+  --aa-border: #21303a;
+  --aa-accent: #0b63d6;
+}
+
+/* Utility: use aa-card class on common card containers */
+.bg-white.aa-card,
+.aa-card.bg-white {
+  /* allow components that already use bg-white to adopt the card style */
+}
+
+/* Header nav buttons: make Dashboard/About/Profile readable in dark mode */
+.header-nav button {
+  /* keep default behavior in light mode */
+}
+
+html.dark .header-nav button {
+  color: var(--aa-text) !important;
+  background-color: transparent !important;
+}
+
+html.dark .header-nav button:hover {
+  background-color: rgba(255, 255, 255, 0.04) !important;
+}
+
+/* Slightly stronger hover for focus/keyboard users */
+html.dark .header-nav button:focus {
+  outline: 2px solid rgba(255, 255, 255, 0.06);
+  outline-offset: 2px;
+}
+
+/* Ensure certain utility text/background colors remain legible in dark mode */
+html.dark .text-gray-700,
+html.dark .text-gray-800 {
+  color: var(--aa-text) !important;
+}
+html.dark .text-gray-500,
+html.dark .text-gray-600,
+html.dark .text-gray-400 {
+  color: var(--aa-muted) !important;
+}
+
+html.dark .text-red-600 {
+  color: #ff8b8b !important;
+}
+html.dark .text-yellow-600 {
+  color: #f7d67a !important;
+}
+html.dark .text-green-600 {
+  color: #6ee7b7 !important;
+}
+html.dark .text-orange-600 {
+  color: #fb923c !important;
+}
+html.dark .text-blue-600,
+html.dark .text-blue-700 {
+  color: #7cc3ff !important;
+}
+
+html.dark .bg-blue-50 {
+  background-color: rgba(255, 255, 255, 0.03) !important;
+}
+html.dark .text-blue-700 {
+  color: #9ad4ff !important;
+}
+
+/* Make form controls readable in dark mode */
+html.dark input,
+html.dark textarea,
+html.dark select,
+html.dark .bg-white input,
+html.dark .bg-white textarea {
+  color: var(--aa-text) !important;
+  background-color: transparent !important;
+  border-color: var(--aa-border) !important;
+}
+
+html.dark input::placeholder,
+html.dark textarea::placeholder {
+  color: rgba(230, 238, 248, 0.6) !important;
+}
+
+/* Ensure send button text remains visible */
+html.dark button.bg-blue-600 {
+  background-color: #0b63d6 !important;
+  color: var(--aa-text) !important;
+}
